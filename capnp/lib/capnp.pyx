@@ -4429,11 +4429,13 @@ class _Importer:
 
         paths = self.additional_paths + paths
         for path in paths:
+            print(f"capnp path {path}")
             if not path:
                 path = _os.getcwd()
             elif not is_abs(path):
                 path = abspath(path)
 
+            print(f"trying {path+sep+capnp_module_name}")
             if is_file(path+sep+capnp_module_name):
                 return _Loader(fullname, join_path(path, capnp_module_name), self.additional_paths)
             if has_underscores:
