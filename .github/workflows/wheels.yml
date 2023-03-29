@@ -57,8 +57,7 @@ jobs:
         env:
           CIBW_BEFORE_ALL: >
             env &&
-            rm -rf dist build build64 bundled &&
-            ls -lh dist &&
+            ls -lh . &&
             which capnp
           CIBW_ARCHS: ${{ matrix.arch }}
           # TODO: Disable building PyPy wheels. If the build system gets modernized, this should be
