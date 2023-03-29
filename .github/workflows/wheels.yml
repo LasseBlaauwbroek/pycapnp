@@ -56,9 +56,10 @@ jobs:
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
           CIBW_BEFORE_ALL: >
-            env
-            rm -rf dist build build64 bundled
-            ls -lh dist
+            env &&
+            rm -rf dist build build64 bundled &&
+            ls -lh dist &&
+            which capnp
           CIBW_ARCHS: ${{ matrix.arch }}
           # TODO: Disable building PyPy wheels. If the build system gets modernized, this should be
           # auto-detected based on the Cython dependency.
