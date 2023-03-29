@@ -64,7 +64,7 @@ jobs:
           CIBW_TEST_REQUIRES: pytest
           CIBW_TEST_COMMAND: pytest {project}
           # Only needed to make the macosx arm64 build work
-          CMAKE_OSX_ARCHITECTURES: ${{ matrix.arch }}
+          CMAKE_OSX_ARCHITECTURES: "${{ matrix.arch == 'arm64' && 'arm64' || '' }}"
 
       - uses: actions/upload-artifact@v3
         with:
