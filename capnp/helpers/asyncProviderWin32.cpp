@@ -112,7 +112,7 @@ public:
   }
 
 protected:
-  const SOCKET fd;
+  SOCKET fd;
   uint flags;
   PyFdListener *fdListener;
 
