@@ -50,6 +50,8 @@
 #define IPV6_V6ONLY 27
 #endif
 
+#include "capnp/helpers/asyncProvider.h"
+
 using namespace kj;
 
 // =======================================================================================
