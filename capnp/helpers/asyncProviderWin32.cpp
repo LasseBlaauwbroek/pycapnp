@@ -29,15 +29,14 @@
 // For Unix implementation, see asyncProviderUnix.cpp
 
 // Request Vista-level APIs.
-#include "win32-api-version.h"
+#include <kj/win32-api-version.h>
 
-#include "async-io.h"
-#include "async-io-internal.h"
-#include "async-win32.h"
-#include "debug.h"
-#include "thread.h"
-#include "io.h"
-#include "vector.h"
+#include <kj/async-io.h>
+#include <kj/async-win32.h>
+#include <kj/debug.h>
+#include <kj/thread.h>
+#include <kj/io.h>
+#include <kj/vector.h>
 #include <set>
 
 #include <winsock2.h>
