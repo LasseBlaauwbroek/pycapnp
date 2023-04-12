@@ -11,8 +11,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-            arch: x86_64
+          # - os: ubuntu-latest
+          #   arch: x86_64
           # - os: ubuntu-latest
           #   arch: i686
           # - os: ubuntu-latest
@@ -30,8 +30,8 @@ jobs:
           # - os: macOS-latest
           #   arch: universal2
 
-          - os: windows-2019
-            arch: AMD64
+          # - os: windows-2019
+          #   arch: AMD64
           - os: windows-2019
             arch: x86
           # Does not build currently
