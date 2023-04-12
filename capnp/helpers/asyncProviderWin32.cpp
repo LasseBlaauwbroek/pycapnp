@@ -123,12 +123,12 @@ private:
   public:
     ReadPromiseAdapter(kj::PromiseFulfiller<void>& fulfiller, OwnedFileDescriptor& ofd)
       : fulfiller(fulfiller), ofd(ofd) {
-      ofd.fdListener->add_reader(ofd.fd, &readCallback, (void*)this);
+      ofd.fdListener->add_reader(reinterpret_cast<int>(ofd.fd), &readCallback, (void*)this);
       ofd.readRegistered = true;
     }
 
     ~ReadPromiseAdapter() {
-      ofd.fdListener->remove_reader(ofd.fd);
+      ofd.fdListener->remove_reader(reinterpret_cast<int>(ofd.fd));
       ofd.readRegistered = false;
     }
 
@@ -150,12 +150,12 @@ private:
   public:
     WritePromiseAdapter(kj::PromiseFulfiller<void>& fulfiller, OwnedFileDescriptor& ofd)
       : fulfiller(fulfiller), ofd(ofd) {
-      ofd.fdListener->add_writer(ofd.fd, &writeCallback, (void*)this);
+      ofd.fdListener->add_writer(reinterpret_cast<int>(ofd.fd), &writeCallback, (void*)this);
       ofd.writeRegistered = true;
     }
 
     ~WritePromiseAdapter() {
-      ofd.fdListener->remove_writer(ofd.fd);
+      ofd.fdListener->remove_writer(reinterpret_cast<int>(ofd.fd));
       ofd.writeRegistered = false;
     }
 
