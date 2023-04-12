@@ -83,7 +83,7 @@ class OwnedFileDescriptor {
 public:
   OwnedFileDescriptor(SOCKET fd, uint flags,
                       PyFdListener *fdListener)
-    : fd(applyFlags(fd, flags)), flags(flags), fdListener(fdListener) {
+    : fd(fd), flags(flags), fdListener(fdListener) {
     // TODO(perf): Maybe use SetFileCompletionNotificationModes() to tell Windows not to bother
     //   delivering an event when the operation completes inline. Not currently implemented on
     //   Wine, though.
