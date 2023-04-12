@@ -13,19 +13,19 @@ jobs:
         include:
           - os: ubuntu-latest
             arch: x86_64
-          - os: ubuntu-latest
-            arch: i686
-          - os: ubuntu-latest
-            arch: aarch64
-          - os: ubuntu-latest
-            arch: ppc64le
-          - os: ubuntu-latest
-            arch: s390x
+          # - os: ubuntu-latest
+          #   arch: i686
+          # - os: ubuntu-latest
+          #   arch: aarch64
+          # - os: ubuntu-latest
+          #   arch: ppc64le
+          # - os: ubuntu-latest
+          #   arch: s390x
 
-          - os: macOS-latest
-            arch: x86_64
-          - os: macOS-latest
-            arch: arm64
+          # - os: macOS-latest
+          #   arch: x86_64
+          # - os: macOS-latest
+          #   arch: arm64
           # Disabled until someone figures out how to build capnproto for arm64 and x86_64 simultaneously
           # - os: macOS-latest
           #   arch: universal2
