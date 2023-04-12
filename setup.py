@@ -203,6 +203,7 @@ extensions = [
         [
             "capnp/helpers/capabilityHelper.cpp",
             "capnp/helpers/asyncProviderUnix.cpp",
+            "capnp/helpers/asyncProviderWin32.cpp",
             "capnp/lib/*.pyx",
         ],
         extra_compile_args=extra_compile_args,
