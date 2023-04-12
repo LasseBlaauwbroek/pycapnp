@@ -25,6 +25,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#if !_WIN32
+// For Win32 implementation, see asyncProviderWin32.cpp
+
 #include <netinet/tcp.h>
 #include <kj/debug.h>
 #include <fcntl.h>
@@ -543,3 +546,5 @@ kj::Own<kj::ConnectionReceiver> PyLowLevelAsyncIoProvider::wrapListenSocketFd(in
 kj::Timer& PyLowLevelAsyncIoProvider::getTimer() {
   return *timer;
 }
+
+#endif  // !_WIN32
