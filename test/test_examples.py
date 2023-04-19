@@ -142,13 +142,6 @@ def test_addressbook_example(cleanup):
     assert ret == 0
 
 
-@pytest.mark.skipif(
-    sys.platform == "win32",
-    reason="""
-Asyncio bug with libcapnp timer, likely due to asyncio starving some event loop.
-See https://github.com/capnproto/pycapnp/issues/196
-""",
-)
 def test_async_example(cleanup):
     address = "{}:36434".format(hostname)
     server = "async_server.py"
