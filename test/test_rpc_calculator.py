@@ -18,7 +18,6 @@ async def kj_loop():
 
 
 async def evaluate_impl(expression, params=None):
-
     which = expression.which()
 
     if which == "literal":
@@ -28,7 +27,6 @@ async def evaluate_impl(expression, params=None):
 
 
 class ValueImpl(calculator_capnp.Calculator.Value.Server):
-
     def __init__(self, value):
         self.value = value
 
@@ -37,7 +35,6 @@ class ValueImpl(calculator_capnp.Calculator.Value.Server):
 
 
 class CalculatorImpl(calculator_capnp.Calculator.Server):
-
     async def evaluate(self, expression, _context, **kwargs):
         return ValueImpl(await evaluate_impl(expression))
 
@@ -46,8 +43,14 @@ async def new_connection(stream):
     await capnp.TwoPartyServer(stream, bootstrap=CalculatorImpl()).on_disconnect()
 
 
-async def main(connection):
-    client = capnp.TwoPartyClient(connection)
+async def test_calculator():
+    read, write = socket.socketpair()
+    read = await capnp.AsyncIoStream.create_connection(sock=read)
+    write = await capnp.AsyncIoStream.create_connection(sock=write)
+
+    _ = capnp.TwoPartyServer(write, bootstrap=CalculatorImpl())
+
+    client = capnp.TwoPartyClient(read)
 
     # Bootstrap the Calculator interface
     calculator = client.bootstrap().cast_as(calculator_capnp.Calculator)
@@ -57,12 +60,3 @@ async def main(connection):
     assert response.value == 123
 
     print("PASS")
-
-
-async def test_calculator():
-    read, write = socket.socketpair()
-    read = await capnp.AsyncIoStream.create_connection(sock=read)
-    write = await capnp.AsyncIoStream.create_connection(sock=write)
-
-    _ = capnp.TwoPartyServer(write, bootstrap=CalculatorImpl())
-    await main(read)
