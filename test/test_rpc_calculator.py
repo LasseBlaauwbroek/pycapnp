@@ -18,7 +18,6 @@ async def kj_loop():
         yield
 
 
-
 async def test_calculator():
     read, write = socket.socketpair()
     read = await capnp.AsyncIoStream.create_connection(sock=read)
