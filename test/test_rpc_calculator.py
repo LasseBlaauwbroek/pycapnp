@@ -39,14 +39,8 @@ class CalculatorImpl(calculator_capnp.Calculator.Server):
         return ValueImpl(await evaluate_impl(expression))
 
 
-async def test_calculator():
-    read, write = socket.socketpair()
-    read = await capnp.AsyncIoStream.create_connection(sock=read)
-    write = await capnp.AsyncIoStream.create_connection(sock=write)
-
-    _ = capnp.TwoPartyServer(write, bootstrap=CalculatorImpl())
-
-    client = capnp.TwoPartyClient(read)
+async def main(connection):
+    client = capnp.TwoPartyClient(connection)
 
     # Bootstrap the Calculator interface
     calculator = client.bootstrap().cast_as(calculator_capnp.Calculator)
@@ -56,3 +50,12 @@ async def test_calculator():
     assert response.value == 123
 
     print("PASS")
+
+
+async def test_calculator():
+    read, write = socket.socketpair()
+    read = await capnp.AsyncIoStream.create_connection(sock=read)
+    write = await capnp.AsyncIoStream.create_connection(sock=write)
+
+    _ = capnp.TwoPartyServer(write, bootstrap=CalculatorImpl())
+    await main(read)
