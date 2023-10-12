@@ -39,10 +39,6 @@ class CalculatorImpl(calculator_capnp.Calculator.Server):
         return ValueImpl(await evaluate_impl(expression))
 
 
-async def new_connection(stream):
-    await capnp.TwoPartyServer(stream, bootstrap=CalculatorImpl()).on_disconnect()
-
-
 async def test_calculator():
     read, write = socket.socketpair()
     read = await capnp.AsyncIoStream.create_connection(sock=read)
