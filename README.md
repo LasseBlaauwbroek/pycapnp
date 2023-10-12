@@ -10,7 +10,6 @@
 ## Requirements
 
 
-
 * C++14 supported compiler
   - gcc 6.1+ (5+ may work)
   - clang 6 (3.4+ may work)
