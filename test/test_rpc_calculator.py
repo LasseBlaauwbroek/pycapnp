@@ -8,7 +8,6 @@ import capnp
 examples_dir = os.path.join(os.path.dirname(__file__), "..", "examples")
 sys.path.append(examples_dir)
 
-import async_calculator_server  # noqa: E402
 import calculator_capnp
 
 
@@ -16,6 +15,35 @@ import calculator_capnp
 async def kj_loop():
     async with capnp.kj_loop():
         yield
+
+
+async def evaluate_impl(expression, params=None):
+
+    which = expression.which()
+
+    if which == "literal":
+        return expression.literal
+    else:
+        raise Exception("bla")
+
+
+class ValueImpl(calculator_capnp.Calculator.Value.Server):
+
+    def __init__(self, value):
+        self.value = value
+
+    async def read(self, **kwargs):
+        return self.value
+
+
+class CalculatorImpl(calculator_capnp.Calculator.Server):
+
+    async def evaluate(self, expression, _context, **kwargs):
+        return ValueImpl(await evaluate_impl(expression))
+
+
+async def new_connection(stream):
+    await capnp.TwoPartyServer(stream, bootstrap=CalculatorImpl()).on_disconnect()
 
 
 async def main(connection):
@@ -36,5 +64,5 @@ async def test_calculator():
     read = await capnp.AsyncIoStream.create_connection(sock=read)
     write = await capnp.AsyncIoStream.create_connection(sock=write)
 
-    _ = capnp.TwoPartyServer(write, bootstrap=async_calculator_server.CalculatorImpl())
+    _ = capnp.TwoPartyServer(write, bootstrap=CalculatorImpl())
     await main(read)
