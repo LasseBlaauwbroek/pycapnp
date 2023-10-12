@@ -8,7 +8,6 @@ import capnp
 examples_dir = os.path.join(os.path.dirname(__file__), "..", "examples")
 sys.path.append(examples_dir)
 
-import async_calculator_client  # noqa: E402
 import async_calculator_server  # noqa: E402
 
 import calculator_capnp
