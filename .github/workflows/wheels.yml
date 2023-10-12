@@ -15,12 +15,12 @@ jobs:
             arch: x86_64
           - os: ubuntu-latest
             arch: i686
-          - os: ubuntu-latest
-            arch: aarch64
-          - os: ubuntu-latest
-            arch: ppc64le
-          - os: ubuntu-latest
-            arch: s390x
+          # - os: ubuntu-latest
+          #   arch: aarch64
+          # - os: ubuntu-latest
+          #   arch: ppc64le
+          # - os: ubuntu-latest
+          #   arch: s390x
 
           - os: macOS-latest
             arch: x86_64
