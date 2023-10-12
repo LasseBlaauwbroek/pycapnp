@@ -2,7 +2,6 @@ import os
 import socket
 import sys  # add examples dir to sys.path
 import pytest
-import asyncio
 
 import capnp
 
