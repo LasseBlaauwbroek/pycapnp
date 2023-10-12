@@ -298,3 +298,12 @@ async def main(connection):
     assert response.value == 512
 
     print("PASS")
+
+
+async def cmd_main(host):
+    host, port = host.split(":")
+    await main(await capnp.AsyncIoStream.create_connection(host=host, port=port))
+
+
+if __name__ == "__main__":
+    exit(__name__)

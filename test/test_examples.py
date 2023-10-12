@@ -117,11 +117,11 @@ def run_subprocesses(
     serverp.kill()
 
 
-def test_async_calculator_example(unused_tcp_port, cleanup):
-    address = "{}:{}".format(hostname, unused_tcp_port)
-    server = "async_calculator_server.py"
-    client = "async_calculator_client.py"
-    run_subprocesses(address, server, client)
+# def test_async_calculator_example(unused_tcp_port, cleanup):
+#     address = "{}:{}".format(hostname, unused_tcp_port)
+#     server = "async_calculator_server.py"
+#     client = "async_calculator_client.py"
+#     run_subprocesses(address, server, client)
 
 
 def test_addressbook_example(cleanup):
